@@ -34,11 +34,6 @@
         }
     </script>
     <style>
-        .tab-btn.active {
-            background-color: #7c52d3;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(124, 82, 211, 0.25);
-        }
         .custom-scrollbar::-webkit-scrollbar {
             height: 6px;
             width: 6px;
@@ -75,14 +70,9 @@
                     </button>
                 </div>
 
-                <nav class="flex flex-wrap gap-1 bg-lavender-950/80 p-1 rounded-xl border border-lavender-800/60 w-full md:w-auto justify-center">
-                    <button onclick="switchTab('setup')" id="tab-setup" class="tab-btn px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all flex items-center gap-1.5">
-                        <i data-lucide="settings" class="w-4 h-4"></i> Setup & Test Bench
-                    </button>
-                    <button onclick="switchTab('evaluation')" id="tab-evaluation" class="tab-btn active px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all flex items-center gap-1.5">
-                        <i data-lucide="sliders" class="w-4 h-4"></i> Evaluator
-                    </button>
-                </nav>
+                <div class="text-xs text-lavender-200 bg-lavender-900/80 px-3 py-1.5 rounded-lg border border-lavender-800/80 font-medium flex items-center gap-1.5">
+                    <i data-lucide="check-square" class="w-4 h-4 text-lavender-300"></i> User Acceptance Test Bench
+                </div>
             </div>
         </header>
 
@@ -101,8 +91,8 @@
                     <button onclick="createNewClientModal()" class="px-2.5 py-1 bg-lavender-600 hover:bg-lavender-500 text-white rounded-lg font-medium transition flex items-center gap-1 shadow-sm">
                         <i data-lucide="plus" class="w-3.5 h-3.5"></i> New Profile
                     </button>
-                    <button onclick="duplicateCurrentClient()" class="px-2.5 py-1 bg-lavender-800 hover:bg-lavender-700 text-lavender-100 rounded-lg font-medium transition flex items-center gap-1 border border-lavender-700">
-                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> Clone
+                    <button onclick="editCurrentClientModal()" class="px-2.5 py-1 bg-lavender-800 hover:bg-lavender-700 text-lavender-100 rounded-lg font-medium transition flex items-center gap-1 border border-lavender-700">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Edit Profile
                     </button>
                 </div>
 
@@ -127,9 +117,9 @@
             </div>
         </section>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5">
 
-            <div id="client-summary-card" class="bg-white rounded-2xl p-4 mb-5 border border-lavender-200 shadow-sm relative overflow-hidden">
+            <div id="client-summary-card" class="bg-white rounded-2xl p-4 border border-lavender-200 shadow-sm relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-2 h-full bg-lavender-600"></div>
                 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
                     <div class="space-y-1 max-w-3xl">
@@ -137,109 +127,18 @@
                             <h2 id="disp-client-name" class="text-lg font-bold text-slate-900">Global Telecom Multilingual Assistant</h2>
                             <span id="disp-company" class="text-xs font-semibold text-lavender-700 bg-lavender-100 px-2.5 py-0.5 rounded-full border border-lavender-200">Global Telecom Inc</span>
                             <span id="disp-agent-version" class="text-xs bg-slate-100 text-slate-700 font-semibold px-2.5 py-0.5 rounded-full border border-slate-200">v3.1.0-prod</span>
-                            <span id="disp-language" class="text-xs bg-lavender-50 text-lavender-800 font-medium px-2 py-0.5 rounded-md border border-lavender-200">en-US & es-MX Code-switching</span>
+                            <span id="disp-language" class="text-xs bg-lavender-50 text-lavender-800 font-medium px-2 py-0.5 rounded-md border border-lavender-200">English & Spanish Bilingual</span>
                         </div>
                         <p id="disp-usecase" class="text-xs text-slate-700 font-medium"><strong>Workflow:</strong> International Roaming Support & Bill Pay</p>
-                        <p id="disp-purpose" class="text-xs text-slate-600"><strong>Agent Purpose:</strong> Assist callers with account management, billing explanations, and device activation across English and Spanish dialects.</p>
-                        <p id="disp-description" class="text-xs text-slate-500 italic">"Articulate, empathetic, and culturally adaptable voice agent capable of smooth bilingual code-switching and domain jargon clarity."</p>
+                        <p id="disp-purpose" class="text-xs text-slate-600"><strong>Agent Purpose:</strong> Assist callers with account management, billing explanations, and device activation across English and Spanish.</p>
+                        <p id="disp-description" class="text-xs text-slate-500 italic">"Articulate, empathetic, and culturally adaptable voice agent capable of smooth bilingual language switching and clear terminology."</p>
                     </div>
                     <div class="flex md:flex-col items-end gap-1.5 text-xs bg-lavender-50/80 p-3 rounded-xl border border-lavender-200/80 min-w-[220px] w-full lg:w-auto">
-                        <div><span class="text-slate-500">Reviewer:</span> <span id="disp-reviewer" class="font-semibold text-lavender-950">Senior UAT Reviewer</span></div>
-                        <div><span class="text-slate-500">UAT Status:</span> <span id="disp-target" class="font-bold text-emerald-700">Pass (0 Critical Failures)</span></div>
+                        <div><span class="text-slate-500">UAT Reviewer:</span> <span id="disp-reviewer" class="font-semibold text-lavender-950">Senior UAT Reviewer</span></div>
+                        <div><span class="text-slate-500">UAT Status:</span> <span id="disp-target" class="font-bold text-emerald-700">Pass (Ready for Launch)</span></div>
                     </div>
                 </div>
             </div>
-
-            <section id="view-setup" class="space-y-5 hidden">
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-lavender-200 space-y-4">
-                    <div class="flex justify-between items-center border-b border-lavender-100 pb-3">
-                        <div>
-                            <h2 class="text-base font-bold text-lavender-950 flex items-center gap-2">
-                                <i data-lucide="sliders" class="w-5 h-5 text-lavender-600"></i> Client Profile & Agent Scope Setup
-                            </h2>
-                            <p class="text-xs text-slate-500">Configure client details, evaluation benchmark, and purpose for evaluation reports.</p>
-                        </div>
-                        <button onclick="saveClientProfileFromTab()" class="px-4 py-2 bg-lavender-600 hover:bg-lavender-700 text-white rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
-                            <i data-lucide="save" class="w-4 h-4"></i> Save Setup Metadata
-                        </button>
-                    </div>
-
-                    <form id="setup-form" onsubmit="event.preventDefault(); saveClientProfileFromTab();" class="space-y-4 text-xs">
-                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">UAT Reviewer Name / Team *</label>
-                                <input type="text" id="setup-input-reviewer" required placeholder="e.g. Senior UAT Reviewer" class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Client Name *</label>
-                                <input type="text" id="setup-input-name" required placeholder="e.g. Apex Health Assistant" class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Company / Primary Contact</label>
-                                <input type="text" id="setup-input-company" placeholder="e.g. Apex Health Inc." class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Agent Build / Version</label>
-                                <input type="text" id="setup-input-version" placeholder="e.g. v3.1.0-prod" class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Use Case / Workflow *</label>
-                                <input type="text" id="setup-input-usecase" required placeholder="e.g. Patient Triage & Appointment Scheduling" class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Languages & Dialects Covered</label>
-                                <input type="text" id="setup-input-language" placeholder="e.g. en-US & es-MX Bilingual" class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Voice Description (Client Request) *</label>
-                                <textarea id="setup-input-desc" rows="2" required placeholder="e.g. Warm, empathetic, articulate persona with clear domain jargon enunciation." class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none"></textarea>
-                            </div>
-                            <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Agent Purpose & Scope *</label>
-                                <textarea id="setup-input-purpose" rows="2" required placeholder="e.g. Assist callers with account balance inquiries and routing complex support tickets." class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-lavender-500 focus:outline-none"></textarea>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-lavender-200 space-y-4">
-                    <div class="flex justify-between items-center border-b border-lavender-100 pb-3">
-                        <div>
-                            <h2 class="text-base font-bold text-lavender-950 flex items-center gap-2">
-                                <i data-lucide="spell-check" class="w-5 h-5 text-lavender-600"></i> Key Terms & Pronunciation Test Bench
-                            </h2>
-                            <p class="text-xs text-slate-500">Specify client-required proper nouns, brand terms, URLs, and phonetic targets to be tested during UAT calls.</p>
-                        </div>
-                        <button onclick="addKeyTermRow()" class="px-3 py-1.5 bg-lavender-600 hover:bg-lavender-700 text-white rounded-xl text-xs font-semibold transition flex items-center gap-1 shadow-sm">
-                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Target Term
-                        </button>
-                    </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead class="bg-lavender-100/80 text-lavender-950 font-semibold border-b border-lavender-200">
-                                <tr>
-                                    <th class="py-2.5 px-3">Term / Phrase / URL Target</th>
-                                    <th class="py-2.5 px-3">Category</th>
-                                    <th class="py-2.5 px-3">Target Pronunciation / IPA Guide</th>
-                                    <th class="py-2.5 px-3">Expected Agent Context / Phrasing</th>
-                                    <th class="py-2.5 px-3 text-center">Tested Status</th>
-                                    <th class="py-2.5 px-3 text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="testbench-tbody" class="divide-y divide-lavender-100">
-                                <!-- Dynamic Test Bench Rows -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
 
             <section id="view-evaluation" class="space-y-5">
                 <div class="bg-white p-4 rounded-2xl shadow-sm border border-lavender-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
@@ -247,7 +146,7 @@
                         <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
                             <i data-lucide="sliders" class="w-4 h-4 text-lavender-600"></i> Voice UAT Evaluator
                         </h2>
-                        <p class="text-xs text-slate-500 mt-0.5">Grade each of the 6 dimensions once for the overall client evaluation.</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Grade each dimension based on customer experience across testing scenarios.</p>
                     </div>
                     <button onclick="resetCurrentScores()" class="px-2.5 py-1.5 border border-rose-200 hover:bg-rose-50 text-rose-700 rounded-xl text-xs font-medium transition flex items-center gap-1">
                         <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Ratings
@@ -259,14 +158,47 @@
                         <table id="evaluation-table" class="w-full text-left text-xs">
                             <thead class="bg-lavender-950 text-white font-semibold">
                                 <tr id="eval-header-row">
-                                    <th class="py-2.5 px-4 w-64 shadow-md">Streamlined Voice Dimension</th>
+                                    <th class="py-2.5 px-4 w-64 shadow-md">Voice Dimension</th>
                                     <th class="py-2.5 px-4 w-40 text-center">Client UAT Score</th>
-                                    <th class="py-2.5 px-4 min-w-[320px]">Descriptor Guidance (Pass / Minor / Fail)</th>
-                                    <th class="py-2.5 px-4 min-w-[250px]">Qualitative Evidence & Notes</th>
+                                    <th class="py-2.5 px-4 min-w-[320px]">Evaluation Guidelines (Pass / Minor / Fail)</th>
+                                    <th class="py-2.5 px-4 min-w-[250px]">Customer Feedback & Notes</th>
                                 </tr>
                             </thead>
                             <tbody id="eval-tbody" class="divide-y divide-lavender-100">
                                 <!-- Dynamic Rows Added via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- KEY TERMS & PRONUNCIATION TEST BENCH PANEL -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-lavender-200 space-y-4">
+                    <div class="flex justify-between items-center border-b border-lavender-100 pb-3">
+                        <div>
+                            <h2 class="text-sm font-bold text-lavender-950 flex items-center gap-2">
+                                <i data-lucide="spell-check" class="w-4 h-4 text-lavender-600"></i> Key Terms, Pronunciation & URL Test Bench
+                            </h2>
+                            <p class="text-xs text-slate-500">Record specific brand names, proper nouns, web URLs, and mispronunciations that must be tested during UAT calls.</p>
+                        </div>
+                        <button onclick="addKeyTermRow()" class="px-3 py-1.5 bg-lavender-600 hover:bg-lavender-700 text-white rounded-xl text-xs font-semibold transition flex items-center gap-1 shadow-sm">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Target Term
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-lavender-100/80 text-lavender-950 font-semibold border-b border-lavender-200">
+                                <tr>
+                                    <th class="py-2.5 px-3">Target Phrase / Term / URL</th>
+                                    <th class="py-2.5 px-3">Category</th>
+                                    <th class="py-2.5 px-3">Target Pronunciation Guide</th>
+                                    <th class="py-2.5 px-3">Expected Context / Observed Note</th>
+                                    <th class="py-2.5 px-3 text-center">UAT Status</th>
+                                    <th class="py-2.5 px-3 text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="testbench-tbody" class="divide-y divide-lavender-100">
+                                <!-- Dynamic Test Bench Rows -->
                             </tbody>
                         </table>
                     </div>
@@ -313,18 +245,18 @@
                     </div>
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">Voice & Language Settings</label>
-                        <input type="text" id="form-input-language" placeholder="e.g. en-US & es-MX Bilingual" class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
+                        <input type="text" id="form-input-language" placeholder="e.g. English & Spanish Bilingual" class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-lavender-500 focus:outline-none">
                     </div>
                 </div>
 
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1">Voice Description (What Client Asked For) *</label>
-                    <textarea id="form-input-desc" rows="2" required placeholder="e.g. Calm, articulate, empathetic voice persona with crisp medical terminology enunciation." class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-lavender-500 focus:outline-none"></textarea>
+                    <textarea id="form-input-desc" rows="2" required placeholder="e.g. Calm, articulate, empathetic voice persona with clear terminology." class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-lavender-500 focus:outline-none"></textarea>
                 </div>
 
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1">Agent Purpose & Scope *</label>
-                    <textarea id="form-input-purpose" rows="2" required placeholder="e.g. Inbound receptionist agent verifying insurance coverage and routing triage calls." class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-lavender-500 focus:outline-none"></textarea>
+                    <textarea id="form-input-purpose" rows="2" required placeholder="e.g. Inbound receptionist agent verifying insurance coverage and routing calls." class="w-full bg-lavender-50/50 border border-lavender-200 rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-lavender-500 focus:outline-none"></textarea>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -351,50 +283,50 @@
             {
                 id: "timing",
                 name: "Timing & Responsiveness",
-                subComponents: ["Latency", "Dead Air"],
-                passDesc: "Immediate, prompt response times (<1.2s); no unexplained dead air during backend tool lookups.",
-                minorDesc: "Noticeable turn-taking delay (1.5s–2.5s) or brief processing gap, but tolerable without user dropping.",
-                failDesc: "Severe turn latency (>3.0s), unannounced long silences, or awkward processing pauses."
+                subComponents: ["Response Time", "Silence"],
+                passDesc: "Responds promptly; stays quiet only during natural breaks or quick system checks.",
+                minorDesc: "Slight delay before responding, but not enough to disrupt the conversation.",
+                failDesc: "Long awkward pauses, unnaturally delayed answers, or uncomfortable silences."
             },
             {
                 id: "dynamics",
                 name: "Conversational Dynamics",
-                subComponents: ["Turn-taking", "Interruption Handling"],
-                passDesc: "Detects speech endpoints naturally, yields instantly when barged in on, and preserves conversation context.",
-                minorDesc: "Occasional VAD timing overlap; stops speaking upon user interruption and recovers context with minor friction.",
-                failDesc: "Talks over user, fails to yield turn, cuts off user mid-phrase, or loses state upon interruption."
+                subComponents: ["Turn-Taking", "Interruption"],
+                passDesc: "Pauses naturally for the caller, stops speaking immediately when interrupted, and stays on topic.",
+                minorDesc: "Occasionally talks over the caller briefly, but stops and recovers smoothly.",
+                failDesc: "Cuts off the caller, speaks over them repeatedly, or loses track of what was being said."
             },
             {
                 id: "naturalness",
                 name: "Speech Naturalness",
-                subComponents: ["Fluency", "Pacing", "Prosody"],
-                passDesc: "Smooth human-sounding phrasing, dynamic prosody, appropriate intonation, and natural pacing.",
-                minorDesc: "Clear and understandable with minor robotic tone or slightly flat prosody during complex multi-sentence turns.",
-                failDesc: "Highly synthetic, robotic cadence, inappropriate pitch shifts, or uncomfortable speed/chunking."
+                subComponents: ["Fluency", "Pacing"],
+                passDesc: "Sounds smooth, conversational, and human-like with pleasant tone and natural pacing.",
+                minorDesc: "Easy to understand, but sounds slightly robotic or monotone during longer explanations.",
+                failDesc: "Unnatural or choppy voice, uncomfortable speed, or robotic cadence."
             },
             {
                 id: "pronunciation",
                 name: "Pronunciation & Clarity",
-                subComponents: ["Pronunciation", "Enunciation", "Terminology"],
-                passDesc: "Flawless, crisp enunciation of specialized domain terms, proper nouns, URLs, digits, and brand jargon.",
-                minorDesc: "Minor pronunciation or enunciation slip that does not impede user comprehension or task completion.",
-                failDesc: "Mispronounces key domain terms, customer/entity names, currency, acronyms, or numbers."
+                subComponents: ["Pronunciation", "Enunciation"],
+                passDesc: "Clearly and accurately pronounces company names, product terms, web addresses, numbers, and names.",
+                minorDesc: "Slight slip in pronunciation or enunciation, but the meaning remains completely clear.",
+                failDesc: "Mispronounces key business terms, company names, URLs, or important numbers."
             },
             {
                 id: "persona",
-                name: "Persona & Brand Consistency",
+                name: "Persona & Tone",
                 subComponents: ["Consistency", "Confidence"],
-                passDesc: "Unwavering identity, strong brand alignment, authoritative delivery, and bounded, decisive responses.",
-                minorDesc: "Mostly stable identity with subtle tone drift or occasional tentative phrasing under complex scenarios.",
-                failDesc: "Persona or tone shifts noticeably across turns, contradicts prompt guidelines, or displays excessive uncertainty."
+                passDesc: "Polite, confident, and professional throughout the call; sounds like a reliable brand representative.",
+                minorDesc: "Tone is generally appropriate, but sounds slightly hesitant or unsure on tricky questions.",
+                failDesc: "Inconsistent tone, sounds confused or hesitant, or does not match brand expectations."
             },
             {
                 id: "language",
-                name: "Language, Vocabulary & Localization",
-                subComponents: ["Multilingual Switch", "Word Choice", "Dialect"],
-                passDesc: "Flawless dialect adaptation, culturally appropriate word choices, and natural multilingual code-switching.",
-                minorDesc: "Understands target language idioms well; minor accent stiffness during multilingual transitions.",
-                failDesc: "Awkward word choice, unnatural literal translations, poor dialect matching, or broken code-switching."
+                name: "Language & Localization",
+                subComponents: ["Word Choice", "Language Switch"],
+                passDesc: "Uses clear, natural phrasing; switches between languages smoothly when applicable.",
+                minorDesc: "Phrasing is understandable, but sounds a bit rigid or awkwardly translated.",
+                failDesc: "Confusing word choices, incorrect translations, or poor handling of language changes."
             }
         ];
 
@@ -404,9 +336,9 @@
                 name: "Global Telecom Multilingual Assistant",
                 company: "Global Telecom Inc",
                 usecase: "International Roaming Support & Bill Pay",
-                language: "en-US & es-MX Code-switching",
-                description: "Articulate, empathetic, and culturally adaptable voice agent capable of smooth bilingual code-switching and domain jargon clarity.",
-                purpose: "Assist callers with account management, billing explanations, and device activation across English and Spanish dialects.",
+                language: "English & Spanish Bilingual",
+                description: "Articulate, empathetic, and culturally adaptable voice agent capable of smooth bilingual language switching and clear terminology.",
+                purpose: "Assist callers with account management, billing explanations, and device activation across English and Spanish.",
                 version: "v3.1.0-prod",
                 reviewer: "Senior UAT Reviewer",
                 uatScores: {
@@ -414,21 +346,21 @@
                     "Conversational Dynamics": "Pass",
                     "Speech Naturalness": "Minor",
                     "Pronunciation & Clarity": "Pass",
-                    "Persona & Brand Consistency": "Pass",
-                    "Language, Vocabulary & Localization": "Pass"
+                    "Persona & Tone": "Pass",
+                    "Language & Localization": "Pass"
                 },
                 comments: {
-                    "Timing & Responsiveness": "Turn latency acceptable; minor lookup delay on account query.",
-                    "Conversational Dynamics": "Cedes floor smoothly upon user speech.",
-                    "Speech Naturalness": "Slightly robotic phrasing on legal terms read.",
-                    "Pronunciation & Clarity": "Flawless URL and brand name enunciation.",
-                    "Persona & Brand Consistency": "Maintains courteous, confident persona.",
-                    "Language, Vocabulary & Localization": "Smooth English-Spanish code switching."
+                    "Timing & Responsiveness": "Response time is quick; slight pause during account balance lookup.",
+                    "Conversational Dynamics": "Stops speaking immediately when the caller interjects.",
+                    "Speech Naturalness": "Slightly robotic tone when reading legal disclosures.",
+                    "Pronunciation & Clarity": "Web addresses and account numbers pronounced clearly.",
+                    "Persona & Tone": "Courteous and professional tone maintained throughout.",
+                    "Language & Localization": "Smooth transition between English and Spanish."
                 },
                 testbench: [
                     { id: 1, term: "globaltelecom.com/roaming", category: "URL Pronunciation", target: "global-telecom-dot-com-slash-roaming", context: "Directing user to self-service portal", status: "Pass" },
-                    { id: 2, term: "eSIM Activation", category: "Proper Noun / Tech Term", target: "EE-sim activation", context: "Explaining dual SIM device setup", status: "Pass" },
-                    { id: 3, term: "Factura y Saldo", category: "Multilingual Target", target: "fahk-TOO-rah ee SAHL-doh", context: "Spanish billing summary response", status: "Pass" }
+                    { id: 2, term: "eSIM Activation", category: "Brand / Product Term", target: "EE-sim activation", context: "Explaining dual SIM device setup", status: "Pass" },
+                    { id: 3, term: "Factura y Saldo", category: "Mispronunciation Check", target: "fahk-TOO-rah ee SAHL-doh", context: "Spanish billing summary response", status: "Pass" }
                 ]
             }
         };
@@ -444,8 +376,8 @@
         });
 
         function loadStateFromStorage() {
-            const savedClients = localStorage.getItem("voiceuat_clients_v7");
-            const savedActiveId = localStorage.getItem("voiceuat_active_client_id_v7");
+            const savedClients = localStorage.getItem("voiceuat_clients_v9");
+            const savedActiveId = localStorage.getItem("voiceuat_active_client_id_v9");
 
             if (savedClients) {
                 try {
@@ -466,8 +398,8 @@
         }
 
         function saveStateToStorage() {
-            localStorage.setItem("voiceuat_clients_v7", JSON.stringify(allClients));
-            localStorage.setItem("voiceuat_active_client_id_v7", activeClientId);
+            localStorage.setItem("voiceuat_clients_v9", JSON.stringify(allClients));
+            localStorage.setItem("voiceuat_active_client_id_v9", activeClientId);
         }
 
         function populateClientSelector() {
@@ -497,54 +429,15 @@
             document.getElementById("disp-client-name").innerText = client.name;
             document.getElementById("disp-company").innerText = client.company || "General Profile";
             document.getElementById("disp-agent-version").innerText = client.version || "v1.0";
-            document.getElementById("disp-language").innerText = client.language || "en-US";
+            document.getElementById("disp-language").innerText = client.language || "English";
             document.getElementById("disp-usecase").innerHTML = `<strong>Workflow:</strong> ${client.usecase || 'N/A'}`;
             document.getElementById("disp-purpose").innerHTML = `<strong>Agent Purpose:</strong> ${client.purpose || 'N/A'}`;
             document.getElementById("disp-description").innerText = `"${client.description || 'No description provided.'}"`;
             document.getElementById("disp-reviewer").innerText = client.reviewer || "Senior UAT Reviewer";
 
-            document.getElementById("setup-input-reviewer").value = client.reviewer || "";
-            document.getElementById("setup-input-name").value = client.name || "";
-            document.getElementById("setup-input-company").value = client.company || "";
-            document.getElementById("setup-input-version").value = client.version || "v1.0";
-            document.getElementById("setup-input-usecase").value = client.usecase || "";
-            document.getElementById("setup-input-language").value = client.language || "";
-            document.getElementById("setup-input-desc").value = client.description || "";
-            document.getElementById("setup-input-purpose").value = client.purpose || "";
-
-            renderTestBenchTable();
             renderScorecard();
+            renderTestBenchTable();
             updateUatTargetStatus();
-        }
-
-        function saveClientProfileFromTab() {
-            const client = allClients[activeClientId];
-            if (!client) return;
-
-            client.reviewer = document.getElementById("setup-input-reviewer").value;
-            client.name = document.getElementById("setup-input-name").value;
-            client.company = document.getElementById("setup-input-company").value;
-            client.version = document.getElementById("setup-input-version").value;
-            client.usecase = document.getElementById("setup-input-usecase").value;
-            client.language = document.getElementById("setup-input-language").value;
-            client.description = document.getElementById("setup-input-desc").value;
-            client.purpose = document.getElementById("setup-input-purpose").value;
-
-            saveStateToStorage();
-            populateClientSelector();
-            renderActiveClient();
-            alert("Client metadata saved!");
-        }
-
-        function switchTab(tabKey) {
-            const tabs = ['setup', 'evaluation'];
-            tabs.forEach(t => {
-                document.getElementById(`view-${t}`).classList.add('hidden');
-                document.getElementById(`tab-${t}`).classList.remove('active');
-            });
-
-            document.getElementById(`view-${tabKey}`).classList.remove('hidden');
-            document.getElementById(`tab-${tabKey}`).classList.add('active');
         }
 
         function renderScorecard() {
@@ -587,7 +480,7 @@
                         </div>
                     </td>
                     <td class="py-2 px-3 bg-white">
-                        <textarea onblur="updateDimensionComment('${dim.name}', this.value)" placeholder="Evidence or notes for this dimension..." rows="2" class="w-full text-xs bg-lavender-50/40 border border-lavender-200 rounded-lg p-1.5 text-slate-700 focus:bg-white focus:ring-2 focus:ring-lavender-500 focus:outline-none transition resize-y">${currentComment}</textarea>
+                        <textarea onblur="updateDimensionComment('${dim.name}', this.value)" placeholder="Customer feedback or notes..." rows="2" class="w-full text-xs bg-lavender-50/40 border border-lavender-200 rounded-lg p-1.5 text-slate-700 focus:bg-white focus:ring-2 focus:ring-lavender-500 focus:outline-none transition resize-y">${currentComment}</textarea>
                     </td>
                 `;
 
@@ -634,7 +527,7 @@
             const uatTargetEl = document.getElementById('disp-target');
             if (failCount === 0) {
                 uatTargetEl.className = "font-bold text-emerald-700";
-                uatTargetEl.innerText = "Pass (0 Critical Failures)";
+                uatTargetEl.innerText = "Pass (Ready for Launch)";
             } else {
                 uatTargetEl.className = "font-bold text-rose-700";
                 uatTargetEl.innerText = `Needs Attention (${failCount} Failures)`;
@@ -652,7 +545,7 @@
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="6" class="py-6 text-center text-slate-400 text-xs">
-                            No key terms or pronunciation targets added yet. Click "Add Target Term" above.
+                            No mispronunciations, key terms, or URLs added yet. Click "+ Add Target Term" above.
                         </td>
                     </tr>
                 `;
@@ -669,21 +562,21 @@
 
                 tr.innerHTML = `
                     <td class="py-2 px-3 font-bold text-lavender-950">
-                        <input type="text" value="${item.term || ''}" onblur="updateTestBenchItem(${idx}, 'term', this.value)" class="w-full bg-transparent font-bold text-slate-800 border-b border-dashed border-lavender-300 focus:outline-none focus:border-lavender-600">
+                        <input type="text" value="${item.term || ''}" onblur="updateTestBenchItem(${idx}, 'term', this.value)" placeholder="e.g. acme.com/pay" class="w-full bg-transparent font-bold text-slate-800 border-b border-dashed border-lavender-300 focus:outline-none focus:border-lavender-600">
                     </td>
                     <td class="py-2 px-3">
                         <select onchange="updateTestBenchItem(${idx}, 'category', this.value)" class="bg-lavender-50/70 border border-lavender-200 rounded px-1.5 py-0.5 text-xs text-slate-700">
-                            <option value="Proper Noun / Tech Term" ${item.category === 'Proper Noun / Tech Term' ? 'selected' : ''}>Proper Noun / Tech Term</option>
                             <option value="URL Pronunciation" ${item.category === 'URL Pronunciation' ? 'selected' : ''}>URL Pronunciation</option>
-                            <option value="Multilingual Target" ${item.category === 'Multilingual Target' ? 'selected' : ''}>Multilingual Target</option>
-                            <option value="IPA / Phonetic Target" ${item.category === 'IPA / Phonetic Target' ? 'selected' : ''}>IPA / Phonetic Target</option>
+                            <option value="Brand / Product Term" ${item.category === 'Brand / Product Term' ? 'selected' : ''}>Brand / Product Term</option>
+                            <option value="Mispronunciation Check" ${item.category === 'Mispronunciation Check' ? 'selected' : ''}>Mispronunciation Check</option>
+                            <option value="Customer Name / Address" ${item.category === 'Customer Name / Address' ? 'selected' : ''}>Customer Name / Address</option>
                         </select>
                     </td>
                     <td class="py-2 px-3">
-                        <input type="text" value="${item.target || ''}" onblur="updateTestBenchItem(${idx}, 'target', this.value)" placeholder="Phonetic guide..." class="w-full bg-transparent font-mono text-[11px] text-slate-700 border-b border-dashed border-lavender-300 focus:outline-none focus:border-lavender-600">
+                        <input type="text" value="${item.target || ''}" onblur="updateTestBenchItem(${idx}, 'target', this.value)" placeholder="Phonetic guide or expected sound..." class="w-full bg-transparent text-slate-700 border-b border-dashed border-lavender-300 focus:outline-none focus:border-lavender-600">
                     </td>
                     <td class="py-2 px-3">
-                        <input type="text" value="${item.context || ''}" onblur="updateTestBenchItem(${idx}, 'context', this.value)" placeholder="Context line..." class="w-full bg-transparent text-slate-600 border-b border-dashed border-lavender-300 focus:outline-none focus:border-lavender-600">
+                        <input type="text" value="${item.context || ''}" onblur="updateTestBenchItem(${idx}, 'context', this.value)" placeholder="Call context or observed error..." class="w-full bg-transparent text-slate-600 border-b border-dashed border-lavender-300 focus:outline-none focus:border-lavender-600">
                     </td>
                     <td class="py-2 px-3 text-center">
                         <select onchange="updateTestBenchItem(${idx}, 'status', this.value)" class="rounded-full px-2 py-0.5 text-[11px] ${statusBadge}">
@@ -708,10 +601,10 @@
             if (!client.testbench) client.testbench = [];
             client.testbench.push({
                 id: Date.now(),
-                term: "New Target Term",
-                category: "Proper Noun / Tech Term",
-                target: "pronunciation guide",
-                context: "Usage prompt context",
+                term: "New Target Term / URL",
+                category: "Brand / Product Term",
+                target: "Expected pronunciation",
+                context: "Call context",
                 status: "Pending"
             });
             saveStateToStorage();
@@ -752,8 +645,8 @@
                 ["Requested Voice Description", client.description || ""],
                 ["Agent Purpose & Scope", client.purpose || ""],
                 [],
-                ["Streamlined 6-Dimension Voice UAT Summary"],
-                ["Streamlined Dimension", "Sub-Components", "UAT Status", "Qualitative Notes"]
+                ["Voice UAT Dimension Summary"],
+                ["Voice Dimension", "Sub-Components", "UAT Status", "Customer Notes"]
             ];
 
             STREAMLINED_DIMENSIONS.forEach(dim => {
@@ -765,13 +658,13 @@
             const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
             XLSX.utils.book_append_sheet(wb, wsSummary, "Overview & Client Profile");
 
-            const tbHeaders = ["Term / Phrase Target", "Category", "Target Pronunciation Guide", "Expected Context", "Status"];
+            const tbHeaders = ["Target Phrase / Term / URL", "Category", "Target Pronunciation Guide", "Expected Context", "Status"];
             const tbRows = [tbHeaders];
             (client.testbench || []).forEach(tb => {
                 tbRows.push([tb.term, tb.category, tb.target, tb.context, tb.status]);
             });
             const wsTestBench = XLSX.utils.aoa_to_sheet(tbRows);
-            XLSX.utils.book_append_sheet(wb, wsTestBench, "Pronunciation Test Bench");
+            XLSX.utils.book_append_sheet(wb, wsTestBench, "Key Terms & URLs Test Bench");
 
             const fileName = `${(client.name || 'VoiceUAT').replace(/\s+/g, '_')}_VoiceUAT_Report.xlsx`;
             XLSX.writeFile(wb, fileName);
@@ -782,7 +675,7 @@
             document.getElementById('form-input-name').value = "";
             document.getElementById('form-input-company').value = "";
             document.getElementById('form-input-usecase').value = "";
-            document.getElementById('form-input-language').value = "en-US";
+            document.getElementById('form-input-language').value = "English";
             document.getElementById('form-input-desc').value = "";
             document.getElementById('form-input-purpose').value = "";
             document.getElementById('form-input-version').value = "v1.0.0";
@@ -791,46 +684,40 @@
             document.getElementById('modal-client-profile').classList.remove('hidden');
         }
 
+        function editCurrentClientModal() {
+            const client = allClients[activeClientId];
+            if (!client) return;
+
+            document.getElementById('modal-profile-title').innerText = "Edit Client Profile Metadata";
+            document.getElementById('form-input-name').value = client.name || "";
+            document.getElementById('form-input-company').value = client.company || "";
+            document.getElementById('form-input-usecase').value = client.usecase || "";
+            document.getElementById('form-input-language').value = client.language || "English";
+            document.getElementById('form-input-desc').value = client.description || "";
+            document.getElementById('form-input-purpose').value = client.purpose || "";
+            document.getElementById('form-input-version').value = client.version || "v1.0.0";
+            document.getElementById('form-input-reviewer').value = client.reviewer || "";
+
+            document.getElementById('modal-client-profile').classList.remove('hidden');
+        }
+
         function saveClientProfileForm(e) {
             e.preventDefault();
-            const newId = 'client-' + Date.now();
-            allClients[newId] = {
-                id: newId,
-                name: document.getElementById('form-input-name').value,
-                company: document.getElementById('form-input-company').value,
-                usecase: document.getElementById('form-input-usecase').value,
-                language: document.getElementById('form-input-language').value,
-                description: document.getElementById('form-input-desc').value,
-                purpose: document.getElementById('form-input-purpose').value,
-                version: document.getElementById('form-input-version').value,
-                reviewer: document.getElementById('form-input-reviewer').value,
-                uatScores: {},
-                comments: {},
-                testbench: []
-            };
-            activeClientId = newId;
+            const client = allClients[activeClientId];
+            
+            client.name = document.getElementById('form-input-name').value;
+            client.company = document.getElementById('form-input-company').value;
+            client.usecase = document.getElementById('form-input-usecase').value;
+            client.language = document.getElementById('form-input-language').value;
+            client.description = document.getElementById('form-input-desc').value;
+            client.purpose = document.getElementById('form-input-purpose').value;
+            client.version = document.getElementById('form-input-version').value;
+            client.reviewer = document.getElementById('form-input-reviewer').value;
 
             saveStateToStorage();
             populateClientSelector();
             renderActiveClient();
             closeModal('modal-client-profile');
-        }
-
-        function duplicateCurrentClient() {
-            const current = allClients[activeClientId];
-            if (!current) return;
-
-            const newId = 'client-' + Date.now();
-            const cloned = JSON.parse(JSON.stringify(current));
-            cloned.id = newId;
-            cloned.name = `${current.name} (Copy)`;
-
-            allClients[newId] = cloned;
-            activeClientId = newId;
-
-            saveStateToStorage();
-            populateClientSelector();
-            renderActiveClient();
         }
 
         function deleteCurrentClient() {
